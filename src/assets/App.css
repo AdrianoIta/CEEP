@@ -2,10 +2,14 @@
     display: flex;
 }
 
-:root{
+:root {
     --primaria: #58a4b0;
     --secundaria: #373f51;
-    --secundaria: #cccccc;
+    --secundaria-ativa: #cccccc;
     --fundo: #ffffff;
     --fundo-detalhes: #ececec;
+  }
+
+.categoria-principal{
+    flex-grow: 3;
 }
