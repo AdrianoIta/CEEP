@@ -4,49 +4,27 @@ import FormularioCadastro from "./components/FormularioCadastro";
 import ListadeCategorias from "./components/ListadeCategorias";
 import "./assets/App.css";
 import './assets/index.css';
+import Categorias from "./dados/Categorias";
+import ArrayDeNotas from "./dados/ArrayDeNotas";
 class App extends Component {
   constructor() {
     super()
-    this.state = {
-      notas:[],
-      categorias:[]
-    }
-  }
-  adicionarCategoria(nomeCategoria,){
-    debugger;
-    const novoArrayCategorias = [...this.state.categorias, nomeCategoria]
-    const novoEstado = {...this.state, categorias:novoArrayCategorias};
-    this.setState(novoEstado)
-  }
-  deletarNota(index) {
-    let arrayNotas = this.state.notas;
-    arrayNotas.splice(index,1);
-    this.setState({notas:arrayNotas})
-  }
-  criarNota(titulo, texto) {
-    const novaNota = {
-      titulo, 
-      texto
-    }
-    const novoArrayNotas = [...this.state.notas,novaNota]
-    const novoEstado = {
-      notas:novoArrayNotas
-    }
-    this.setState(novoEstado)
+    this.categorias = new Categorias();
+    this.notas = new ArrayDeNotas();
   }
   render() {
     return (
       <section className="conteudo">  
           <FormularioCadastro 
-            categorias={this.state.categorias}
-            criarNota={this.criarNota.bind(this)}/>
+            categorias={this.categorias}
+            criarNota={this.notas.adicionarNota.bind(this.notas)}/>
         <main className="categoria-principal">
           <ListadeCategorias 
-            adicionarCategoria={this.adicionarCategoria.bind(this)}
-            categorias={this.state.categorias}/>
+            adicionarCategoria={this.categorias.adicionarCategoria.bind(this.categorias)}
+            categorias={this.categorias}/>
           <ListaDeNotas 
-              notas={this.state.notas}
-              apagarNota={this.deletarNota.bind(this)}
+              notas={this.notas}
+              apagarNota={this.notas.apagarNota.bind(this.notas)}
           />
         </main>
       </section>
